@@ -1,0 +1,110 @@
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #12141c;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #6366f1;
+  --accent2: #a855f7;
+  --glow: rgba(99, 102, 241, 0.16);
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  --bg: #0b0d14;
+  --surface: #141824;
+  --text: #eef0f6;
+  --muted: #8b93a7;
+  --border: #232838;
+  --accent: #818cf8;
+  --accent2: #c084fc;
+  --glow: rgba(129, 140, 248, 0.18);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.app::before {
+  content: '';
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 60%;
+  background: radial-gradient(ellipse at 50% 0%, var(--glow), transparent 70%);
+  pointer-events: none;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+.logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 6px 18px var(--glow);
+}
+
+.toggle {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.2s;
+}
+.toggle:hover { border-color: var(--accent); }
+.toggle:active { transform: scale(0.92); }
+.toggle svg { width: 20px; height: 20px; }
+
+.main { flex: 1; position: relative; }
+
+.footer {
+  position: relative;
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+}
